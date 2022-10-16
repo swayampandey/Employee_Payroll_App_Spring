@@ -12,5 +12,6 @@ public class EmployeePayrollController {
     public EmployeePayrollData getEmployeePayrollDataById(@PathVariable int employeeId) {
         EmployeePayrollData empData = new EmployeePayrollData(1, new EmployeePayrollDTO("Swayam", 30000));
         return empData;
+        
     }
 }
