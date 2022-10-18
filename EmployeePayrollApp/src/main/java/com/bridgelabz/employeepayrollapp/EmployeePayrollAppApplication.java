@@ -15,5 +15,6 @@ public class EmployeePayrollAppApplication {
         System.out.println("Employee Payroll Application Connected");
         ApplicationContext context = SpringApplication.run(EmployeePayrollAppApplication.class, args);
         log.info("Employee payroll App Started in {} Environment",context.getEnvironment().getProperty("environment"));
+        log.info("Employee Payroll DB User is {} ",context.getEnvironment().getProperty("spring.datasource.username"));
     }
 }
