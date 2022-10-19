@@ -53,4 +53,3 @@ public class EmployeePayrollData {
         this.salary = salary;
     }
 }
-
