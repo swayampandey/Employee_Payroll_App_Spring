@@ -1,14 +1,12 @@
 package com.bridgelabz.employeepayrollapp.model;
 
 import com.bridgelabz.employeepayrollapp.dto.EmployeePayrollDTO;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.context.annotation.EnableMBeanExport;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -30,8 +28,11 @@ public class EmployeePayrollData {
     @Column(name = "department")
     private List<String> department;
 
-    public EmployeePayrollData(int employeeId, EmployeePayrollDTO employeePayrollDTO) {
-        this.employeeId = employeeId;
+    public EmployeePayrollData(EmployeePayrollDTO employeePayrollDTO){
+        this.updateEmployeePayrollData(employeePayrollDTO);
+    }
+
+    public void updateEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO){
         this.name = employeePayrollDTO.getName();
         this.salary = employeePayrollDTO.getSalary();
         this.gender = employeePayrollDTO.getGender();

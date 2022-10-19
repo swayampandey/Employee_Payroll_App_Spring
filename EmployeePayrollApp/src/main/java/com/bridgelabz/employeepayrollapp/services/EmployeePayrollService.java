@@ -21,36 +21,29 @@ public class EmployeePayrollService implements IEmployeePayrollService{
     @Override
     public List<EmployeePayrollData> getEmployeePayrollData() {
 
-        return employeePayrollList;
+        return employeePayrollRepository.findAll();
     }
 
     @Override
     public EmployeePayrollData getEmployeePayrollDataById(int employeeId) {
-        return employeePayrollList.stream()
-                .filter(employeePayrollData -> employeePayrollData.getEmployeeId() == employeeId)
-                .findFirst()
-                .orElseThrow(() -> new EmployeePayrollException("Employee not found"));
+        return employeePayrollRepository
+                .findById(employeeId)
+                .orElseThrow(() -> new EmployeePayrollException("Employee with "+employeeId+"does not exists"));
     }
+
 
     @Override
     public EmployeePayrollData createEmployeePayrollData(EmployeePayrollDTO employeePayrollDTO) {
         EmployeePayrollData employeePayrollData = null;
-        employeePayrollData = new EmployeePayrollData(employeePayrollList.size()+1,employeePayrollDTO);
-        employeePayrollList.add(employeePayrollData);
+        employeePayrollData = new EmployeePayrollData(employeePayrollDTO);
+//        employeePayrollList.add(employeePayrollData);
         return employeePayrollRepository.save(employeePayrollData);
     }
 
     @Override
     public EmployeePayrollData updateEmployeePayrollData(int employeeId,EmployeePayrollDTO employeePayrollDTO) {
         EmployeePayrollData empData = this.getEmployeePayrollDataById(employeeId);
-        empData.setName(employeePayrollDTO.getName());
-        empData.setSalary(employeePayrollDTO.getSalary());
-        empData.setStartDate(employeePayrollDTO.getStartDate());
-        empData.setGender(employeePayrollDTO.getGender());
-        empData.setNote(employeePayrollDTO.getNote());
-        empData.setProfilePic(employeePayrollDTO.getName());
-        empData.setDepartment(employeePayrollDTO.getDepartment());
-        employeePayrollList.set(employeeId-1,empData);
+        empData.updateEmployeePayrollData((employeePayrollDTO));
         return employeePayrollRepository.save(empData);
     }
 
