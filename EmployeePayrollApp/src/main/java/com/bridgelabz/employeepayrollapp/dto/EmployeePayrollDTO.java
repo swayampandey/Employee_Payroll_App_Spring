@@ -6,6 +6,8 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import java.util.Date;
+import java.util.List;
 
 
 @Data
@@ -15,6 +17,17 @@ public class EmployeePayrollDTO {
     public String name;
     @Min(value = 500, message = "Salary should be more than 500")
     @Max(value = 900000, message = "Salary should not exceeds 900000")
-    public long salary;
+    private long salary;
+
+    private String gender;
+
+    private Date startDate;
+
+    private String note;
+
+    private String profilePic;
+
+    private List<String> department;
+
 
 }
